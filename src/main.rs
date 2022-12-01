@@ -1,6 +1,4 @@
-mod day1;
-mod day2;
-mod day3;
+mod days;
 
 ///```
 ///              _               _
@@ -14,5 +12,5 @@ mod day3;
 ///```
 
 fn main() {
-    day1::main()
+    days::day2::main()
 }
