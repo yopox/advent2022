@@ -13,4 +13,6 @@ mod day3;
 ///       \            /  \            /
 ///```
 
-fn main() {}
+fn main() {
+    day1::main()
+}
