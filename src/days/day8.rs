@@ -10,7 +10,3 @@ fn part1() {
 fn part2() {
 
 }
-
-const EXAMPLE: &str = "";
-const PART1: &str = "";
-const PART2: &str = "";
