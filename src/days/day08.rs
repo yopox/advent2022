@@ -1,4 +1,5 @@
-pub fn main() {
+#[test]
+fn test() {
     part1();
     part2();
 }
