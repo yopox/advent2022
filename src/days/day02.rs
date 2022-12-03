@@ -1,7 +1,13 @@
 #[test]
 fn test() {
-    part1();
-    part2();
+    println!("Day 2");
+    let p1 = part1();
+    println!("Part 1 -> {}", p1);
+    assert_eq!(p1, 17189);
+
+    let p2 = part2();
+    println!("Part 2 -> {}", p2);
+    assert_eq!(p2, 13490);
 }
 
 #[derive(Eq, PartialEq)]
@@ -18,7 +24,7 @@ enum Outcome {
 }
 
 impl Move {
-    fn score(&self) -> u16 {
+    fn score(&self) -> u32 {
         match self {
             Move::Rock => 1,
             Move::Paper => 2,
@@ -59,7 +65,7 @@ impl Move {
 }
 
 impl Outcome {
-    fn score(&self) -> u16 {
+    fn score(&self) -> u32 {
         match self {
             Outcome::Lose => 0,
             Outcome::Draw => 3,
@@ -77,7 +83,7 @@ impl Outcome {
     }
 }
 
-fn part1() {
+fn part1() -> u32 {
     let rounds: Vec<(Move, Move)> = include_str!("data/day2")
         .lines()
         .map(|line| {
@@ -86,14 +92,12 @@ fn part1() {
         })
         .collect();
 
-    let score: u16 = rounds.iter()
+    rounds.iter()
         .map(|(m1, m2)| m2.wins_against(m1).score() + m2.score())
-        .sum();
-
-    println!("{}", score);
+        .sum()
 }
 
-fn part2() {
+fn part2() -> u32 {
     let rounds: Vec<(Move, Outcome)> = include_str!("data/day2")
         .lines()
         .map(|line| {
@@ -102,7 +106,7 @@ fn part2() {
         })
         .collect();
 
-    let score: u16 = rounds.iter()
+    rounds.iter()
         .map(|(m, o)| {
            o.score() + match o {
                Outcome::Lose => m.losing().score(),
@@ -110,7 +114,5 @@ fn part2() {
                Outcome::Draw => m.score(),
            }
         })
-        .sum();
-
-    println!("{}", score);
+        .sum()
 }

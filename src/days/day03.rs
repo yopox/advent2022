@@ -1,5 +1,6 @@
 #[test]
 fn test() {
+    println!("Day 3");
     let p1 = part1();
     println!("Part 1 -> {}", p1);
     assert_eq!(p1, 8088);
