@@ -47,7 +47,7 @@ fn get_moves(moves: &str) -> Vec<(usize, usize, usize)> {
     moves
         .lines()
         .map(|line| move_regex.captures(line).unwrap())
-        .map(|mut cap| (
+        .map(|cap| (
             cap[1].parse::<usize>().unwrap(),
             cap[2].parse::<usize>().unwrap() - 1,
             cap[3].parse::<usize>().unwrap() - 1

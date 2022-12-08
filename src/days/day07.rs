@@ -1,16 +1,20 @@
 use std::iter::Skip;
 use std::str::Lines;
+use crate::benchmark;
 
 #[test]
 fn test() {
     println!("Day 7");
-    let p1 = part1();
+
+    let p1 = part1(&get_sizes(&parse_files()));
     println!("Part 1 -> {}", p1);
     assert_eq!(p1, 1367870);
 
-    let p2 = part2();
+    let p2 = part2(&get_sizes(&parse_files()));
     println!("Part 2 -> {}", p2);
     assert_eq!(p2, 549173);
+
+    benchmark(get_sizes(&parse_files()), |i| part1(i), |i| part2(i))
 }
 
 enum Files {
@@ -89,8 +93,7 @@ fn get_sizes(file: &Files) -> Vec<u32> {
         Files::Folder(_, f) => {
             let mut sizes: Vec<u32> = vec![];
             f.iter().for_each(|subf| sizes.append(&mut get_sizes(subf)));
-            let mut size = get_size(file);
-            sizes.push(size);
+            sizes.push(get_size(file));
             sizes
         },
         Files::File(_) => vec![]
@@ -104,17 +107,17 @@ fn get_size(file: &Files) -> u32 {
     }
 }
 
-fn part1() -> u32 {
-    get_sizes(&parse_files())
+fn part1(sizes: &Vec<u32>) -> u32 {
+    sizes
         .iter()
         .filter(|s| **s <= 100000)
         .sum()
 }
 
-fn part2() -> u32 {
-    let mut sizes = get_sizes(&parse_files());
+fn part2(sizes: &Vec<u32>) -> u32 {
     let available = 70000000 - sizes.last().unwrap();
     let missing = 30000000;
+    let mut sizes = sizes.clone();
     sizes.sort();
     *sizes.iter().find(|s| **s + available >= missing).expect("No such folder")
 }
