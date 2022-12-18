@@ -1,7 +1,7 @@
+#![allow(warnings)]
 use std::time::Instant;
 
 mod days;
-
 ///```
 ///              _               _
 ///           _|  |   AOC      |  | _
